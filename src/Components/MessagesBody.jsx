@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import "./MessageBody.css";
+import "./Responsive.css"
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
   const [msg, setMsg] = useState("");
   const [pos, setPos] = useState(7);
   const [Ids, setId] = useState(1);
-  const [username, setUsername] = useState("User");
+  const [username, setUsername] = useState("You");
   const [messages, setMessages] = useState([]);
   const messageBodyRef = useRef(null);
 
@@ -18,7 +19,7 @@ const MessagesBody = () => {
   // Set username when typing in input
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
-    e.className = "username-setter"
+  
   };
 
   // Send message function
@@ -72,13 +73,15 @@ const MessagesBody = () => {
         </div>
       </div>
       <div className="messageBox">
-        <input
+        {/* some time i remove username becouse i want to change user name when user click on setting button and open user panel */}
+
+        {/* <input
           type="text"
           placeholder='Username'
           value={username}
           onChange={handleUsernameChange}
           className='usernameInput'
-        />
+        /> */}
         <input
           id="userInput"
           type="text"

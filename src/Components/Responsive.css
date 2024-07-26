@@ -1,6 +1,25 @@
-@media (min-width : 900px) {
+@media (max-width : 1200px) {
+    .Sending{
+        left : 75%;
+    }
+    
+}
+@media (max-width : 900px) {
     .Sending{
         left : 65%;
     }
     
 }
+@media (max-width : 600px) {
+    .Sending{
+        left : 35%;
+    }
+    
+}
+/* @media (max-width : 300px) {
+    .Sending{
+        left : 15%;
+        width: 14rem;
+    }
+    
+} */

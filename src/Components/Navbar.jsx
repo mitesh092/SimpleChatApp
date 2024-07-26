@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import React, { useState } from "react";
 import { BiLogoMessenger } from "react-icons/bi";
 import { IoSettingsSharp } from "react-icons/io5";
-import "./Navbar.css"
+import "./Navbar.css";
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -9,15 +9,15 @@ const Navbar = () => {
     setDropdownOpen(!dropdownOpen);
   };
   return (
-    <div className='navbar'>
-      <div className='app-Title'>
+    <div className="navbar">
+      <div className="app-Title">
         <BiLogoMessenger />
-        <p id='title'>SimpleChat</p>
+        <p id="title">SimpleChat</p>
       </div>
-      <div className='setting-icon' onClick={toggleDropdown}>
+      <div className="setting-icon" onClick={toggleDropdown}>
         <IoSettingsSharp />
         {dropdownOpen && (
-          <div className='dropdown-menu'>
+          <div className="dropdown-menu">
             <ul>
               <li>Profile</li>
               <li>Notifications</li>
@@ -27,9 +27,8 @@ const Navbar = () => {
           </div>
         )}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

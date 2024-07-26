@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import "./MessageBody.css";
-import "./Responsive.css"
-import "./animation.css"
+import "./Responsive.css";
+import "./animation.css";
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
@@ -12,7 +12,6 @@ const MessagesBody = () => {
   const [messages, setMessages] = useState([]);
   const messageBodyRef = useRef(null);
 
-  
   // Set message when typing in input
   const handleInputChange = (e) => {
     setMsg(e.target.value);
@@ -21,16 +20,14 @@ const MessagesBody = () => {
   // Set username when typing in input
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
-  
   };
 
   // Send message function
   const sender = () => {
     if (msg.trim().length === 0) return;
 
-    if(msg.length >= 29){
+    if (msg.length >= 29) {
       messageViewFixer();
-
     }
     // add more css in date function
     const newMessage = {
@@ -67,13 +64,15 @@ const MessagesBody = () => {
   }, []);
 
   return (
-    <div className='mainbody'>
-      <div className='messageBody'>
-        <div className='msgcontainer' ref={messageBodyRef}>
+    <div className="mainbody">
+      <div className="messageBody">
+        <div className="msgcontainer" ref={messageBodyRef}>
           {messages.map((message) => (
             <div key={message.id} className="Sending">
-              <p id='name'>{message.username}</p>
-              <p id='msgs' className='paragraph'>{message.text}</p>
+              <p id="name">{message.username}</p>
+              <p id="msgs" className="paragraph">
+                {message.text}
+              </p>
               <span className="timestamp">{message.timestamp}</span>
             </div>
           ))}
@@ -95,12 +94,14 @@ const MessagesBody = () => {
           value={msg}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
-          placeholder='Enter Your Message...'
+          placeholder="Enter Your Message..."
         />
-        <button id='send' onClick={sender}>Send</button>
+        <button id="send" onClick={sender}>
+          Send
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default MessagesBody;

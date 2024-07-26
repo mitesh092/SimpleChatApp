@@ -1,74 +1,96 @@
-import React, { useState } from 'react'
-import "./MessageBody.css"
-// make scrollable to messageContainer ->  FIxed
-// last message add in end of bottom ->  Fixed
-// I don't even  Know how it had fixed and Then  i suddenly realized problem once done also work done ! 
-
+import React, { useState, useRef, useEffect } from 'react';
+import "./MessageBody.css";
 
 const MessagesBody = () => {
-  // Making state  for message saving and postion of message with uniuqe id 
-  const[msg, setMsg] = useState("");
-  const[pos, setpos] = useState(7);
-  const[Ids, setId] = useState(1);
+  // State for message, position, id, username, and message history
+  const [msg, setMsg] = useState("");
+  const [pos, setPos] = useState(7);
+  const [Ids, setId] = useState(1);
+  const [username, setUsername] = useState("User");
+  const [messages, setMessages] = useState([]);
+  const messageBodyRef = useRef(null);
 
-  // set onclick event to send button
-  const setsendMessage = () => {
-    let val = document.getElementById("userInput");
-    setMsg(val.value)
-  }
+  // Set message when typing in input
+  const handleInputChange = (e) => {
+    setMsg(e.target.value);
+  };
 
+  // Set username when typing in input
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+    e.className = "username-setter"
+  };
+
+  // Send message function
   const sender = () => {
-    // if msg is empty we dont have to send 
-    // get messagebody  
-    if(msg.trim().length ==  0) return;
+    if (msg.trim().length === 0) return;
+    // add more css in date function
+    const newMessage = {
+      id: Ids,
+      text: msg,
+      username: username,
+      timestamp: new Date().toLocaleTimeString(),
+    };
 
-    
-    let messageBody  = document.getElementsByClassName("msgcontainer");
+    setMessages([...messages, newMessage]);
+    setId(Ids + 1);
+    setMsg("");
 
-    // creating new message div 
-    let newmsg  = document.createElement("div");
+    // Scroll to the bottom
+    setTimeout(() => {
+      if (messageBodyRef.current) {
+        messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
+      }
+    }, 100);
+  };
 
-    // setting value & styling to new div 
-    newmsg.id  = `${Ids}`; // with new id
-    newmsg.innerHTML = `<p id='name'>You</p>
-            <p id='msgs' className='paragraph'>${msg}</p>`
-
-    newmsg.className = "Sending hide";
-    
-    // make every message postion with 
-    if(pos != 7){
-      setpos(pos+4);
-      newmsg.style.top = `${pos}rem`;
+  // Send message on Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      sender();
     }
-    
-    messageBody[0].appendChild(newmsg);
-    console.log(messageBody[0])
+  };
 
-    // seting text inside paragraph 
-    
-    let rmclass = document.getElementsByClassName("Sending");
-
-    // remove hide class from messages
-    rmclass[0].classList.remove("hide");
-    newmsg.classList.remove("hide")
-    setId(Ids+1);
-    
-
-  }
+  useEffect(() => {
+    // Scroll to the bottom on initial render
+    if (messageBodyRef.current) {
+      messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
+    }
+  }, []);
 
   return (
     <div className='mainbody'>
-        <div className='messageBody'>
-          <div className='msgcontainer'>
-
-          </div>
+      <div className='messageBody'>
+        <div className='msgcontainer' ref={messageBodyRef}>
+          {messages.map((message) => (
+            <div key={message.id} className="Sending">
+              <p id='name'>{message.username}</p>
+              <p id='msgs' className='paragraph'>{message.text}</p>
+              <span className="timestamp">{message.timestamp}</span>
+            </div>
+          ))}
         </div>
-        <div className="messageBox">
-          <input id="userInput" type="text" onChange={setsendMessage} placeholder='Enter Your Message...' />
-          <button id='send' value={msg} onClick={sender}>Send</button>
-        </div>
+      </div>
+      <div className="messageBox">
+        <input
+          type="text"
+          placeholder='Username'
+          value={username}
+          onChange={handleUsernameChange}
+          className='usernameInput'
+        />
+        <input
+          id="userInput"
+          type="text"
+          value={msg}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
+          placeholder='Enter Your Message...'
+        />
+        <button id='send' onClick={sender}>Send</button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default MessagesBody
+export default MessagesBody;

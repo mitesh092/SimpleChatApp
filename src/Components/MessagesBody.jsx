@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import "./MessageBody.css";
 import "./Responsive.css"
+import "./animation.css"
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
@@ -11,6 +12,7 @@ const MessagesBody = () => {
   const [messages, setMessages] = useState([]);
   const messageBodyRef = useRef(null);
 
+  
   // Set message when typing in input
   const handleInputChange = (e) => {
     setMsg(e.target.value);
@@ -25,6 +27,11 @@ const MessagesBody = () => {
   // Send message function
   const sender = () => {
     if (msg.trim().length === 0) return;
+
+    if(msg.length >= 29){
+      messageViewFixer();
+
+    }
     // add more css in date function
     const newMessage = {
       id: Ids,

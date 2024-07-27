@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./MessageBody.css";
 import "./Responsive.css";
 import "./animation.css";
+import EmojiPicker from "emoji-picker-react";
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
@@ -11,6 +12,7 @@ const MessagesBody = () => {
   const [username, setUsername] = useState("You");
   const [messages, setMessages] = useState([]);
   const messageBodyRef = useRef(null);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   // Set message when typing in input
   const handleInputChange = (e) => {
@@ -56,12 +58,19 @@ const MessagesBody = () => {
     }
   };
 
+  
+
   useEffect(() => {
     // Scroll to the bottom on initial render
     if (messageBodyRef.current) {
       messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
     }
   }, []);
+  // emoji handler 
+  const handleEmojiClick = (emoji) => {
+    setMsg(msg + emoji.emoji);
+  };
+
 
   return (
     <div className="mainbody">
@@ -96,6 +105,10 @@ const MessagesBody = () => {
           onKeyPress={handleKeyPress}
           placeholder="Enter Your Message..."
         />
+        <button id="emoji" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+          Emoji
+        </button>
+        {showEmojiPicker && <EmojiPicker onEmojiClick={handleEmojiClick} />}
         <button id="send" onClick={sender}>
           Send
         </button>

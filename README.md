@@ -1,9 +1,19 @@
-# React + Vite
+# Simple Chat App - A real-time chat application built with React and Express.
+# Simple Chat App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time chat application built with React for the frontend and Express for the backend.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# SimpleChatApp
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/simple-chat-app.git
+cd simple-chat-app
+```
+#Backend Setup and Usage<br>
+1.Navigate to the backend directory:<br>
+```bash
+cd backend
+```
+2.Install dependencies:

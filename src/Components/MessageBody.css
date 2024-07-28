@@ -20,8 +20,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: 
-    #eeeeee;
+    background-color: #eeeeee;
     border-top: 0.5px solid #dddddd;
     border:3px solid #dddddd;
     border-radius: 3px;
@@ -51,7 +50,7 @@
 .Sending{
     position: relative;
     top: 34rem;
-    left:83%;
+    left:81.50%;
     margin-bottom: 1rem;
     padding:6px;
     height: auto;
@@ -99,3 +98,4 @@
     left :65%;
 }
 
+/*  give styling to emoji box cause it getting more space from bottom */

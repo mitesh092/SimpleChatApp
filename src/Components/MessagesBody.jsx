@@ -28,7 +28,9 @@ const MessagesBody = () => {
   const sender = () => {
     if (msg.trim().length === 0) return;
 
-    
+    if (msg.length >= 29) {
+      messageViewFixer();
+    }
     // add more css in date function
     const newMessage = {
       id: Ids,

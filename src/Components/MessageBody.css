@@ -99,3 +99,9 @@
 }
 
 /*  give styling to emoji box cause it getting more space from bottom */
+#emoji{
+    height: 2rem;
+    width: 2rem;
+    border: none;
+    font-size: xx-large;
+}

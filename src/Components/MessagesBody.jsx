@@ -3,6 +3,8 @@ import "./MessageBody.css";
 import "./Responsive.css";
 import "./animation.css";
 import EmojiPicker from "emoji-picker-react";
+import { MdEmojiEmotions } from "react-icons/md";
+import { MdCancel } from "react-icons/md"; // cancel button
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
@@ -28,9 +30,7 @@ const MessagesBody = () => {
   const sender = () => {
     if (msg.trim().length === 0) return;
 
-    if (msg.length >= 29) {
-      messageViewFixer();
-    }
+    
     // add more css in date function
     const newMessage = {
       id: Ids,
@@ -66,6 +66,7 @@ const MessagesBody = () => {
       messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
     }
   }, []);
+  
   // emoji handler 
   const handleEmojiClick = (emoji) => {
     setMsg(msg + emoji.emoji);
@@ -87,6 +88,8 @@ const MessagesBody = () => {
           ))}
         </div>
       </div>
+      {/* emoji picker box */}
+      {showEmojiPicker && <EmojiPicker style={{height :"20rem",position:"absolute", bottom:"2rem",width:"100%",animation: "fadeIn 0.5s "}} onEmojiClick={handleEmojiClick} />}
       <div className="messageBox">
         {/* some time i remove username becouse i want to change user name when user click on setting button and open user panel */}
 
@@ -106,9 +109,9 @@ const MessagesBody = () => {
           placeholder="Enter Your Message..."
         />
         <button id="emoji" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-          Emoji
+          {(showEmojiPicker)? <MdCancel/> :<MdEmojiEmotions/>}
         </button>
-        {showEmojiPicker && <EmojiPicker onEmojiClick={handleEmojiClick} />}
+        
         <button id="send" onClick={sender}>
           Send
         </button>

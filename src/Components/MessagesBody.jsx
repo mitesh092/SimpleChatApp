@@ -30,7 +30,6 @@ const MessagesBody = () => {
   const sender = () => {
     if (msg.trim().length === 0) return;
 
-    
     // add more css in date function
     const newMessage = {
       id: Ids,
@@ -58,8 +57,6 @@ const MessagesBody = () => {
     }
   };
 
-  
-
   useEffect(() => {
     // Scroll to the bottom on initial render
     if (messageBodyRef.current) {
@@ -67,11 +64,12 @@ const MessagesBody = () => {
     }
   }, []);
   
-  // emoji handler 
+
+  
+  // emoji handler
   const handleEmojiClick = (emoji) => {
     setMsg(msg + emoji.emoji);
   };
-
 
   return (
     <div className="mainbody">
@@ -89,7 +87,18 @@ const MessagesBody = () => {
         </div>
       </div>
       {/* emoji picker box */}
-      {showEmojiPicker && <EmojiPicker style={{height :"20rem",position:"absolute", bottom:"2rem",width:"100%",animation: "fadeIn 0.5s "}} onEmojiClick={handleEmojiClick} />}
+      {showEmojiPicker && (
+        <EmojiPicker
+          style={{
+            height: "20rem",
+            position: "absolute",
+            bottom: "2rem",
+            width: "100%",
+            animation: "fadeIn 0.5s",
+          }}
+          onEmojiClick={handleEmojiClick}
+        />
+      )}
       <div className="messageBox">
         {/* some time i remove username becouse i want to change user name when user click on setting button and open user panel */}
 
@@ -109,9 +118,9 @@ const MessagesBody = () => {
           placeholder="Enter Your Message..."
         />
         <button id="emoji" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-          {(showEmojiPicker)? <MdCancel/> :<MdEmojiEmotions/>}
+          {showEmojiPicker ? <MdCancel /> : <MdEmojiEmotions />}
         </button>
-        
+
         <button id="send" onClick={sender}>
           Send
         </button>

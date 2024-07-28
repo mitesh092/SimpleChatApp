@@ -13,13 +13,12 @@
     left: 35%;
   }
 }
-/* @media (max-width : 300px) {
-    .Sending{
-        left : 15%;
-        width: 14rem;
-    }
-    
-} */
+@media (max-width: 300px) {
+  .Sending {
+    left: 12%;
+    width: 14rem;
+  }
+}
 /* General styles */
 /* .mainbody {
   display: flex;

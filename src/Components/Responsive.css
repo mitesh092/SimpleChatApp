@@ -20,3 +20,77 @@
     }
     
 } */
+/* General styles */
+/* .mainbody {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+} */
+
+/* .messageBody {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.messageBox {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.messageBox input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.messageBox button {
+  margin-left: 5px;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.messageBox button#emoji {
+  background-color: #28a745;
+}
+
+.messageBox button#send {
+  background-color: #007bff;
+} */
+
+/* Responsive adjustments */
+/* @media (max-width: 768px) {
+  .messageBody {
+    padding: 10px;
+  }
+  
+  .messageBox {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .messageBox input {
+    margin-bottom: 5px;
+  }
+  
+  .messageBox button {
+    width: 100%;
+    margin: 5px 0;
+  }
+} */
+
+/* @media (max-width: 480px) {
+  .messageBox input button{
+    
+  }
+  
+  
+}
+ */

@@ -9,7 +9,7 @@ A real-time chat application built with React for the frontend and Express for t
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/simple-chat-app.git
+    git clone https://github.com/mitesh092/simple-chat-app.git
     ```
 
 2. Navigate into the project directory:

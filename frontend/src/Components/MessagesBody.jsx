@@ -9,7 +9,6 @@ import { MdCancel } from "react-icons/md"; // cancel button
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
   const [msg, setMsg] = useState("");
-  const [pos, setPos] = useState(7);
   const [Ids, setId] = useState(1);
   const [username, setUsername] = useState("You");
   const [messages, setMessages] = useState([]);
@@ -22,33 +21,32 @@ const MessagesBody = () => {
   };
 
   // Set username when typing in input
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  // const handleUsernameChange = (e) => {
+  //   setUsername(e.target.value);
+  // };
 
   // Send message function
   const sender = () => {
-    if (msg.trim().length === 0) return;
+  if (msg.trim().length === 0) return;
 
-    // add more css in date function
-    const newMessage = {
-      id: Ids,
-      text: msg,
-      username: username,
-      timestamp: new Date().toLocaleTimeString(),
-    };
-
-    setMessages([...messages, newMessage]);
-    setId(Ids + 1);
-    setMsg("");
-
-    // Scroll to the bottom
-    setTimeout(() => {
-      if (messageBodyRef.current) {
-        messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
-      }
-    }, 100);
+  const newMessage = {
+    id: Ids,
+    text: msg,
+    username: username,
+    timestamp: new Date().toLocaleTimeString(),
   };
+
+  setMessages((prevMessages) => [...prevMessages, newMessage]);
+  setId((prevId) => prevId + 1);
+  setMsg("");
+
+  // Scroll to the bottom
+  requestAnimationFrame(() => {
+    if (messageBodyRef.current) {
+      messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
+    }
+  });
+};
 
   // Send message on Enter key press
   const handleKeyPress = (e) => {
@@ -71,6 +69,25 @@ const MessagesBody = () => {
     setMsg(msg + emoji.emoji);
   };
 
+  // emoji picker styling 
+  const emojiPickerStyle = {
+    height: "18rem",
+    position: "absolute",
+    bottom: "2rem",
+    width: "100%",
+    animation: "fadeIn 0.5s ",
+  };
+  // resize message 
+  const handleResizeMessage = () => {
+    let messagecontainer = document.getElementsByClassName("msgcontainer")[0];
+    if(showEmojiPicker){
+      messagecontainer.style.height = "98.50%";
+    }else{
+      messagecontainer.style.height = "57%";
+      
+      
+    }
+  }
   return (
     <div className="mainbody">
       <div className="messageBody">
@@ -89,13 +106,7 @@ const MessagesBody = () => {
       {/* emoji picker box */}
       {showEmojiPicker && (
         <EmojiPicker
-          style={{
-            height: "20rem",
-            position: "absolute",
-            bottom: "2rem",
-            width: "100%",
-            animation: "fadeIn 0.5s",
-          }}
+          style={emojiPickerStyle}
           onEmojiClick={handleEmojiClick}
         />
       )}
@@ -118,7 +129,7 @@ const MessagesBody = () => {
           placeholder="Enter Your Message..."
         />
         <button id="emoji" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-          {showEmojiPicker ? <MdCancel /> : <MdEmojiEmotions />}
+          {showEmojiPicker ? <MdCancel onClick={handleResizeMessage}  /> : <MdEmojiEmotions onClick={handleResizeMessage} />}
         </button>
 
         <button id="send" onClick={sender}>

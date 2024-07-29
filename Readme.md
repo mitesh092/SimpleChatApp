@@ -57,7 +57,7 @@ A real-time chat application built with React for the frontend and Express for t
 3. Start the React development server:
 
     ```bash
-    npm start
+    npm dev run
     ```
 
    The React app should now be running on `http://localhost:3000` (or your configured port).

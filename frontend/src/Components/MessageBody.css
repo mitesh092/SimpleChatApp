@@ -50,7 +50,7 @@
 .Sending{
     position: relative;
     top: 34rem;
-    left:81.50%;
+    margin-left:81.50%;
     margin-bottom: 1rem;
     padding:6px;
     height: auto;
@@ -105,3 +105,4 @@
     border: none;
     font-size: xx-large;
 }
+

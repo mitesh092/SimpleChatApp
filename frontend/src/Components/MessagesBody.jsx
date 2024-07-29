@@ -84,8 +84,6 @@ const MessagesBody = () => {
       messagecontainer.style.height = "98.50%";
     }else{
       messagecontainer.style.height = "57%";
-      
-      
     }
   }
   return (
@@ -105,9 +103,10 @@ const MessagesBody = () => {
       </div>
       {/* emoji picker box */}
       {showEmojiPicker && (
-        <EmojiPicker
+        <EmojiPicker searchDisabled lazyLoadEmojis skinTonesDisabled emojiStyle={"facebook"}
           style={emojiPickerStyle}
           onEmojiClick={handleEmojiClick}
+          
         />
       )}
       <div className="messageBox">

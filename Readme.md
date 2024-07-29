@@ -15,7 +15,7 @@ A real-time chat application built with React for the frontend and Express for t
 2. Navigate into the project directory:
 
     ```bash
-    cd simple-chat-app
+    cd SimpleChatApp
     ```
 
 ### Backend Setup and Usage

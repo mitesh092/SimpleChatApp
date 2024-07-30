@@ -9,13 +9,13 @@ A real-time chat application built with React for the frontend and Express for t
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/simple-chat-app.git
+    git clone https://github.com/mitesh092/SimpleChatApp.git
     ```
 
 2. Navigate into the project directory:
 
     ```bash
-    cd simple-chat-app
+    cd SimpleChatApp
     ```
 
 ### Backend Setup and Usage
@@ -57,7 +57,7 @@ A real-time chat application built with React for the frontend and Express for t
 3. Start the React development server:
 
     ```bash
-    npm start
+    npm dev run
     ```
 
    The React app should now be running on `http://localhost:3000` (or your configured port).

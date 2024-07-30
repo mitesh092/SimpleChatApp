@@ -73,7 +73,7 @@ const MessagesBody = () => {
   const emojiPickerStyle = {
     height: "18rem",
     position: "absolute",
-    bottom: "2rem",
+    bottom: "3rem",
     width: "100%",
     animation: "fadeIn 0.5s ",
   };

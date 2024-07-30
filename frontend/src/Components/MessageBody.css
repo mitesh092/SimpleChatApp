@@ -41,7 +41,7 @@
   background-color: rgb(60, 181, 60);
   color: white;
   font: 600;
-  font-size: large;
+  font-size: x-large;
   border: none;
   border-radius: 3px;
 }
@@ -53,7 +53,6 @@
   margin-left: 81.5%;
   margin-bottom: 1rem;
   padding: 6px;
-
   height: auto;
   width: 16rem;
   background-color: skyblue;

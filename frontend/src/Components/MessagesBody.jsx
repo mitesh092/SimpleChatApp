@@ -5,6 +5,7 @@ import "./animation.css";
 import EmojiPicker from "emoji-picker-react";
 import { MdEmojiEmotions } from "react-icons/md";
 import { MdCancel } from "react-icons/md"; // cancel button
+import { MdOutlineSend } from "react-icons/md";
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
@@ -36,6 +37,8 @@ const MessagesBody = () => {
     timestamp: new Date().toLocaleTimeString(),
   };
 
+  
+
   setMessages((prevMessages) => [...prevMessages, newMessage]);
   setId((prevId) => prevId + 1);
   setMsg("");
@@ -54,20 +57,34 @@ const MessagesBody = () => {
       sender();
     }
   };
-
+  // window refresh alert
   useEffect(() => {
-    // Scroll to the bottom on initial render
-    if (messageBodyRef.current) {
-      messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
-    }
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
   
 
+  useEffect(() => {
+    // Scroll to the bottom on initial render
+    
+    if (messageBodyRef.current) {
+      messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
+    }
+
+  }, []);
+  
+  
   
   // emoji handler
   const handleEmojiClick = (emoji) => {
     setMsg(msg + emoji.emoji);
   };
+
 
   // emoji picker styling 
   const emojiPickerStyle = {
@@ -132,7 +149,7 @@ const MessagesBody = () => {
         </button>
 
         <button id="send" onClick={sender}>
-          Send
+          <MdOutlineSend/>
         </button>
       </div>
     </div>

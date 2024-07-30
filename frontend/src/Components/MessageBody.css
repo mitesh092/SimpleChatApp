@@ -62,9 +62,6 @@
   align-items: center;
 }
 
-.hide {
-  visibility: hidden;
-}
 #name {
   position: relative;
   left: 8px;
@@ -96,8 +93,7 @@
   left: 65%;
 }
 
-/*  give styling to emoji box cause it getting more space from bottom */
-/* aa styling emoji icon ni che  */
+
 #emoji {
   height: 2rem;
   width: 2rem;
@@ -109,3 +105,20 @@
   display: none;
 }
 
+/* testing  */
+/* .reciveMessage{
+  position: relative;
+  top: 34rem;
+  margin-left: 1%;
+  margin-right: 70%;
+  margin-bottom: 1rem;
+  padding: 6px;
+  height: auto;
+  width: 16rem;
+  background-color: rgb(244, 239, 239);
+  color :black;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  align-items: center;
+} */

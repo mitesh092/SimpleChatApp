@@ -6,6 +6,7 @@ import EmojiPicker from "emoji-picker-react";
 import { MdEmojiEmotions } from "react-icons/md";
 import { MdCancel } from "react-icons/md"; // cancel button
 import { MdOutlineSend } from "react-icons/md";
+// import io from "socket.io-client"; 
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
@@ -15,6 +16,22 @@ const MessagesBody = () => {
   const [messages, setMessages] = useState([]);
   const messageBodyRef = useRef(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+
+  // Backend Logic 
+  // const socket = io("http://localhost:5000");
+  // useEffect(() => {
+  //   socket.on('receiveMessage', (message) => {
+  //     setMessages((prevMessages) => [
+  //       ...prevMessages,
+  //       { ...message, type: 'incoming' } // Add type property for incoming messages
+  //     ]);
+  //   });
+
+  //   return () => {
+  //     socket.off('receiveMessage');
+  //   };
+  // }, []);
 
   // Set message when typing in input
   const handleInputChange = (e) => {
@@ -35,6 +52,7 @@ const MessagesBody = () => {
     text: msg,
     username: username,
     timestamp: new Date().toLocaleTimeString(),
+    type: 'outgoing',
   };
 
   

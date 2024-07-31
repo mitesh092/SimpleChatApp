@@ -41,11 +41,12 @@ A real-time chat application built with React for the frontend and Express for t
    The backend server should now be running on `http://localhost:5000` (or your configured port).
 
 ### Frontend Setup
+### open new terminal in vscode 
 
 1. Navigate to the `frontend` directory:
 
     ```bash
-    cd ../frontend
+    cd ./frontend
     ```
 
 2. Install dependencies:

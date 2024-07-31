@@ -175,7 +175,7 @@ const MessagesBody = () => {
         <button id="emoji" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
 
           {/* onclick change icon of emoji picker*/}
-          {showEmojiPicker ? <MdCancel onClick={handleRegesizeMessage}  /> : <MdEmojiEmotions onClick={handleResizeMessage} />}
+          {showEmojiPicker ? <MdCancel onClick={handleResizeMessageQQ}  /> : <MdEmojiEmotions onClick={handleResizeMessage} />}
         </button>
 
           {/* send button */}

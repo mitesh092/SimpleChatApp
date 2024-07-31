@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="app-Title">
-        <BiLogoMessenger />
+        <BiLogoMessenger  />
         <p id="title">SimpleChat</p>
       </div>
       <div className="setting-icon" onClick={toggleDropdown}>

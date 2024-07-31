@@ -118,9 +118,9 @@ const MessagesBody = () => {
   const handleResizeMessage = () => {
     let messagecontainer = document.getElementsByClassName("msgcontainer")[0];
     if(showEmojiPicker){
-      messagecontainer.style.height = "98.50%";
+      messagecontainer.style.height = "94.5%";
     }else{
-      messagecontainer.style.height = "57%";
+      messagecontainer.style.height = "41%";
     }
   }
 

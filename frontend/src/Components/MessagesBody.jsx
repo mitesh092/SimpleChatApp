@@ -6,7 +6,7 @@ import EmojiPicker from "emoji-picker-react";
 import { MdEmojiEmotions } from "react-icons/md";
 import { MdCancel } from "react-icons/md"; // cancel button
 import { MdOutlineSend } from "react-icons/md";
-// import io from "socket.io-client"; 
+import io from "socket.io-client"; 
 
 const MessagesBody = () => {
   // State for message, position, id, username, and message history
@@ -82,14 +82,15 @@ const MessagesBody = () => {
       event.returnValue = "";
       return "";
     };
+    // after reload site show message alert
     window.addEventListener("beforeunload", unloadCallback);
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
   
 
+  //Scroll Efect
   useEffect(() => {
     // Scroll to the bottom on initial render
-    
     if (messageBodyRef.current) {
       messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
     }
@@ -112,7 +113,8 @@ const MessagesBody = () => {
     width: "100%",
     animation: "fadeIn 0.5s ",
   };
-  // resize message 
+
+  // resize messageBody 
   const handleResizeMessage = () => {
     let messagecontainer = document.getElementsByClassName("msgcontainer")[0];
     if(showEmojiPicker){
@@ -121,10 +123,14 @@ const MessagesBody = () => {
       messagecontainer.style.height = "57%";
     }
   }
+
+
+  // Rendering component MessageBodu
   return (
     <div className="mainbody">
       <div className="messageBody">
         <div className="msgcontainer" ref={messageBodyRef}>
+          {/* maping to new message in msgcontainer */}
           {messages.map((message) => (
             <div key={message.id} className="Sending">
               <p id="name">{message.username}</p>
@@ -136,6 +142,7 @@ const MessagesBody = () => {
           ))}
         </div>
       </div>
+
       {/* emoji picker box */}
       {showEmojiPicker && (
         <EmojiPicker searchDisabled lazyLoadEmojis skinTonesDisabled emojiStyle={"facebook"}
@@ -144,6 +151,7 @@ const MessagesBody = () => {
           
         />
       )}
+
       <div className="messageBox">
         {/* some time i remove username becouse i want to change user name when user click on setting button and open user panel */}
 
@@ -162,10 +170,15 @@ const MessagesBody = () => {
           onKeyPress={handleKeyPress}
           placeholder="Enter Your Message..."
         />
+
+        {/* Button for Emoji picker  */}
         <button id="emoji" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-          {showEmojiPicker ? <MdCancel onClick={handleResizeMessage}  /> : <MdEmojiEmotions onClick={handleResizeMessage} />}
+
+          {/* onclick change icon of emoji picker*/}
+          {showEmojiPicker ? <MdCancel onClick={handleRegesizeMessage}  /> : <MdEmojiEmotions onClick={handleResizeMessage} />}
         </button>
 
+          {/* send button */}
         <button id="send" onClick={sender}>
           <MdOutlineSend/>
         </button>

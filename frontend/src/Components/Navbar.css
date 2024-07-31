@@ -17,6 +17,8 @@
   display: flex;
   margin-left: 1rem;
 }
+
+/* # for ID attributes & . for class attributes */
 #title {
   font-size: 1.75rem;
   margin-left: 2px;

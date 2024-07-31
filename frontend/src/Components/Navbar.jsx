@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { BiLogoMessenger } from "react-icons/bi";
-import { IoSettingsSharp } from "react-icons/io5";
-import "./Navbar.css";
+import { BiLogoMessenger } from "react-icons/bi"; // Logo Icon
+import { IoSettingsSharp } from "react-icons/io5"; // Setting Icon
+import "./Navbar.css"; // import css for Navbar
 
 const Navbar = () => {
+  // create useState hook on setting icon   
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  // create  toggle event on setting icon
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };

@@ -1,34 +1,29 @@
-import React, { useState } from "react";
-import { BiLogoMessenger } from "react-icons/bi"; // Logo Icon
-import { IoSettingsSharp } from "react-icons/io5"; // Setting Icon
+import React from "react";
+import { BiLogoMessenger } from "react-icons/bi";
+import { GrUserAdd } from "react-icons/gr";
+import { useLocation } from "react-router-dom";
 import "./Navbar.css"; // import css for Navbar
 
 const Navbar = () => {
-  // create useState hook on setting icon   
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  // create  toggle event on setting icon
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  
+  const shouldHide = currentPath !== "/DashBoard";
+  console.log(currentPath, shouldHide)
+
   return (
     <div className="navbar">
       <div className="app-Title">
-        <BiLogoMessenger  />
+        <BiLogoMessenger />
         <p id="title">SimpleChat</p>
       </div>
-      <div className="setting-icon" onClick={toggleDropdown}>
-        <IoSettingsSharp />
-        {dropdownOpen && (
-          <div className="dropdown-menu">
-            <ul>
-              <li>Profile</li>
-              <li>Notifications</li>
-              <li>Privacy</li>
-              <li>Logout</li>
-            </ul>
-          </div>
-        )}
-      </div>
+      
+      {!shouldHide && (
+        <div className="add-friend-icon">
+          <GrUserAdd />
+        </div>
+      )}
     </div>
   );
 };

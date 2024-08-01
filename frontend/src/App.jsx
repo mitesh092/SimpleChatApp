@@ -21,7 +21,7 @@ function App() {
           element={<Login setIsAuthenticated={setIsAuthenticated} />} 
         />
         <Route 
-          path="/messagesbody" 
+          path="/DashBoard" 
           element={
             <PrivateRoute 
               isAuthenticated={isAuthenticated} 

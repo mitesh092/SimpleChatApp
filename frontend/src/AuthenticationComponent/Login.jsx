@@ -22,7 +22,7 @@ const Login = ({ setIsAuthenticated }) => {
     .then(res => {
       if(res.data === "Sucessfully"){
         setIsAuthenticated(true);
-        navigate("/MessagesBody")
+        navigate("/DashBoard")
       }else{
         let Login_req = document.getElementById("Login-req");
         

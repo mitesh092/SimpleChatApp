@@ -31,36 +31,17 @@
 
 
 
-.setting-icon {
+.add-friend-icon {
   margin-right: 1rem;
   position: relative;
   cursor: pointer;
-  display: none;
+  bottom: 5px;
+  width: 2.7rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  text-align: center;
+  padding-left:3px;
+  background-color: rgb(51, 51, 51);
+  color: white;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  color: black;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  width: 150px;
-}
-
-.dropdown-menu ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.dropdown-menu ul li {
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: large;
-}
-
-.dropdown-menu ul li:hover {
-  background-color: #f1f1f1;
-}

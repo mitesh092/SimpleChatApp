@@ -1,6 +1,6 @@
-import { BSON } from "bson";
 import Users from "./models/Users.model.js";
-import bcript from "bcryptjs"
+import bcript from "bcryptjs";
+import genrateTokenAndCookie from "../utils/genrateToken.js";
 
 // registration Api
 export const register = async (req, res) => {
@@ -11,21 +11,19 @@ export const register = async (req, res) => {
     }
 
     const user = await Users.findOne({ userName });
-    const duplicateEmail = await Users.findOne({ email })
+    const duplicateEmail = await Users.findOne({ email });
 
     if (user) {
       return res.status(400).json({ error: "User is Already exists !" });
     }
-    if(duplicateEmail){
+    if (duplicateEmail) {
       return res.status(400).json({ error: "Email is Already register!" });
     }
 
     // hash passwod
-
     const salt = await bcript.genSalt(10);
     const hashPassword = await bcript.hash(password, salt);
-    // fetcing random pic for users
-
+   
 
     // API for random picture
     const boyRandomDefultPic = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
@@ -34,22 +32,27 @@ export const register = async (req, res) => {
     const newUser = new Users({
       userName,
       email,
-      password : hashPassword,
+      password: hashPassword,
       gender,
-      profilePic: gender === "male" ? boyRandomDefultPic : girlRandomDefultPic
+      profilePic: gender === "male" ? boyRandomDefultPic : girlRandomDefultPic,
     });
 
-    await newUser.save();
+    if (newUser) {
+      // gen JWT token
+      genrateTokenAndCookie(newUser._id, res)
+      await newUser.save();
 
-    res.status(201).json({
-        _id : newUser._id,
-        userName : newUser.userName,
-        profilePic :newUser.profilePic
-
-    })
+      res.status(201).json({
+        _id: newUser._id,
+        userName: newUser.userName,
+        profilePic: newUser.profilePic,
+      });
+    }else{
+      res.status(400).json({error : " Inavaild user data !"})
+    }
   } catch (error) {
-    console.log("Error in Signup Controller : ", error.message)
-    res.status(500).json({error : "Internal  server error "})
+    console.log("Error in Signup Controller : ", error.message);
+    res.status(500).json({ error: "Internal  server error " });
   }
   //   UsersModel.findOne({ userName: userName })
   //     .then((user) => {

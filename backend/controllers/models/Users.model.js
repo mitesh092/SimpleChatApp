@@ -1,6 +1,5 @@
-import { profile } from "console";
 import mongoose from "mongoose";
-import { type } from "os";
+
 
 const UserSchema = new mongoose.Schema({
   userName: { type: String, required: true, unique: true },

@@ -15,6 +15,21 @@ const Login = ({ setIsAuthenticated }) => {
     color  : "red",
     fontSize :"1.5rem"
   } 
+
+  const form_style = {
+    backgroundColor : "rgba(0, 0, 0, 0.5)",
+    boxShadow : "inset  -5px -5px rgba(0, 0, 0, 0.5)",
+    borderRadius: "25px" // Added border radius
+  }
+
+  const Style_input_field = {
+    borderRadius: "60px",
+    border: "none",
+    backgroundColor : "rgba(0, 0, 0, 0.5)",
+    outline: "none",
+    color: "white",
+    boxShadow: "inset -3px -3px rgba(0, 0, 0, 0.5)"
+  }
   
   const submitHandle = (e) => {
     e.preventDefault();
@@ -37,17 +52,17 @@ const Login = ({ setIsAuthenticated }) => {
   };
   return (
     <div>
-      <section className="bg-light p-3 p-md-4 p-xl-5">
+      <section className="bg-light p-3 p-md-4 p-xl-5" style={{backgroundImage: "url('https://getwallpapers.com/wallpaper/full/b/1/5/920493-winter-background-images-1920x1200-for-4k-monitor.jpg')"}}>
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-12 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
-              <div className="card border border-light-subtle rounded-4">
-                <div className="card-body p-3 p-md-4 p-xl-5">
+            <div className="col-12 col-md-9 col-lg-7 col-xl-6 col-xxl-5"  >
+              <div >
+                <div className="card-body p-3 p-md-4 p-xl-5" style={form_style}>
                   <div className="row">
                     <div className="col-12">
                       <div className="mb-5">
                         <div className="text-center mb-4"></div>
-                        <h2 className="h4 text-center">Login</h2>
+                        <h2 className="h2 text-center text-light fw-bold ">Login</h2>
                         <h3 className="fs-6 fw-normal text-secondary text-center m-0">
                           Enter your email and password to log in
                         </h3>
@@ -58,8 +73,9 @@ const Login = ({ setIsAuthenticated }) => {
                     <div className="row gy-3 overflow-hidden">
                       <div className="col-12">
                         <div className="form-floating mb-3">
-                          <input
+                          <input 
                             type="email"
+                            style={Style_input_field}
                             className="form-control"
                             name="email"
                             id="email"
@@ -76,6 +92,7 @@ const Login = ({ setIsAuthenticated }) => {
                         <div className="form-floating mb-3">
                           <input
                             type="password"
+                            style={Style_input_field}
                             className="form-control"
                             name="password"
                             id="password"
@@ -109,7 +126,7 @@ const Login = ({ setIsAuthenticated }) => {
                       </div>
                       <div className="col-12">
                         <div className="d-grid">
-                          <button className="btn btn-primary" type="submit">
+                          <button className="btn btn-primary fw-bold" type="submit">
                             Log In
                           </button>
                         </div>
@@ -120,7 +137,7 @@ const Login = ({ setIsAuthenticated }) => {
                   </form>
                   <div className="row">
                     <div className="col-12">
-                      <p className="m-0 text-secondary text-center">
+                      <p className="m-0 text-secondary text-center text-light">
                         Don't have an account?{" "}
                         <Link
                           to="/register"
@@ -133,7 +150,7 @@ const Login = ({ setIsAuthenticated }) => {
                   </div>
                   <div className="row">
                     <div className="col-12">
-                      <p className="mt-5 mb-5">Or continue with</p>
+                      <p className="mt-5 mb-5 text-light ">Or continue with</p>
                       <div className="d-flex gap-2 gap-sm-3 justify-content-center">
                         <Link
                           to="https://accounts.google.com/v3/signin/identifier?authuser=0&continue=https%3A%2F%2Fmyaccount.google.com%2F&ec=GAlAwAE&hl=en&service=accountsettings&flowName=GlifWebSignIn&flowEntry=AddSession&dsh=S-47172700%3A1722489419991171&ddm=0"

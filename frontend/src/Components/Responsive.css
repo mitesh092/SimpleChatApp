@@ -2,15 +2,24 @@
   .Sending {
     margin-left: 75%;
   }
+  .tagline{
+    width: 40%;
+  }
 }
 @media (max-width: 900px) {
   .Sending {
     margin-left: 65%;
   }
+  .tagline{
+    width: 50%;
+  }
 }
 @media (max-width: 600px) {
   .Sending {
     margin-left: 35%;
+  }
+  .tagline{
+    width: 60%;
   }
 }
 @media (max-width: 360px) {
@@ -27,5 +36,8 @@
   }
   #send{
     width: 15vw;
+  }
+  .tagline{
+    width: 70%;
   }
 }

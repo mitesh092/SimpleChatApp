@@ -1,7 +1,7 @@
 .home {
   width: 100%;
   height: 91vh;
-  background: url("/Homepage-assets/1.jpg");
+  background-image: url("https://getwallpapers.com/wallpaper/full/b/1/5/920493-winter-background-images-1920x1200-for-4k-monitor.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -14,7 +14,9 @@
 
 .tagline {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.15em solid orange; /* The typwriter cursor */
+  display: block;
+  width: auto;
+  border-right: 0.15em solid white; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   letter-spacing: 0.15em; /* Adjust as needed */
   display: block;

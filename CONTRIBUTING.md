@@ -10,7 +10,7 @@ Thank you for your interest in contributing to SimpleChatApp! We welcome contrib
 2. **Clone Your Fork**
    - Clone your forked repository to your local machine:
      ```bash
-     git clone https://github.com/YOUR_USERNAME/SimpleChatApp.git
+     git clone https://github.com/mitesh092/SimpleChatApp
      ```
 
 3. **Create a New Branch**

@@ -2,6 +2,7 @@ import Users from "./models/Users.model.js";
 import bcript from "bcryptjs";
 import genrateTokenAndCookie from "../utils/genrateToken.js";
 
+
 // registration Api
 export const register = async (req, res) => {
   try {
@@ -54,36 +55,48 @@ export const register = async (req, res) => {
     console.log("Error in Signup Controller : ", error.message);
     res.status(500).json({ error: "Internal  server error " });
   }
-  //   UsersModel.findOne({ userName: userName })
-  //     .then((user) => {
-  //       if (user) {
-  //         res.json("Username is already Taken !");
-  //       } else {
-  //         UsersModel.create(req.body)
-  //           .then((User) => res.json(User))
-  //           .catch((err) => res.json(err));
-  //       }
-  //     })
-  //     .catch((err) => res.json(err));
+
 };
 
 // login API
 export const login = async (req, res) => {
-  const { email, password } = req.body;
-  Users.findOne({ email: email }).then((user) => {
-    if (user) {
-      if (user.password === password) {
-        res.json("Sucessfully");
-      } else {
-        res.json("Password is Incorrect");
-      }
-    } else {
-      res.json("User is not Found");
+  try {
+
+    const {userName , password} = req.body;
+    const user = await Users.findOne({userName})
+    
+    const ispasswordCorrect = await bcript.compare(password, user?.password || "");
+
+    if(!user || !ispasswordCorrect ){
+      return res.status(400).json({error : "Invaild username or password"})
     }
-  });
+    
+
+    genrateTokenAndCookie(user._id, res);
+
+    res.status(201).json({
+      _id: user._id,
+      userName: user.userName,
+      profilePic: user.profilePic,
+    });
+
+
+  } catch (error) {
+    console.log("Error in Login Controller : ", error.message);
+    res.status(500).json({ error: "Internal  server error " });
+  }
+
+  
 };
 
 // Logout Api
-export const logout = async (req, res) => {
-  res.send("LogOUt");
+export const logout =  (req, res) => {
+  try {
+    res.cookie("jwt","", {MAXaGE : 0} );
+    res.status(200).json({message : " USER logout Successfully !"})
+    
+  } catch (error) {
+    console.log("Error in Signup Controller : ", error.message);
+    res.status(500).json({ error: "Internal  server error " });
+  }
 };

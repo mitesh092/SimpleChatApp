@@ -1,5 +1,6 @@
-import Users from "./models/Users.model.js";
 import bcript from "bcryptjs";
+
+import Users from "../models/Users.model.js";
 import genrateTokenAndCookie from "../utils/genrateToken.js";
 
 

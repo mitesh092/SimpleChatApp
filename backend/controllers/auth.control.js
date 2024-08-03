@@ -1,13 +1,14 @@
 import bcript from "bcryptjs";
 
 import Users from "../models/Users.model.js";
+import OTP from "../Two-fact-Authentication/otp-models/otp.model.js"
 import genrateTokenAndCookie from "../utils/genrateToken.js";
 
 
 // registration Api
 export const register = async (req, res) => {
   try {
-    const { userName, email, password, confrimPassword, gender } = req.body;
+    const { userName, email, otp , password, confrimPassword, gender } = req.body;
     if (password !== confrimPassword) {
       return res.status(400).json({ error: "Password don't match !" });
     }
@@ -20,6 +21,16 @@ export const register = async (req, res) => {
     }
     if (duplicateEmail) {
       return res.status(400).json({ error: "Email is Already register!" });
+    }
+
+    // creating logic of Email OTP sending 
+    const responseOTP = await OTP.find({email});
+    if (responseOTP.length === 0 || otp !== responseOTP[0].otp) {
+      console.log(`gen OTP : ${responseOTP[0].otp} == your : ${otp} `)
+      return res.status(400).json({
+        success: false,
+        message: 'The OTP is not valid',
+      });
     }
 
     // hash passwod

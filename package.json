@@ -19,6 +19,8 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.2",
-    "nodemon": "^3.1.4"
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.1.4",
+    "otp-generator": "^4.0.1"
   }
 }

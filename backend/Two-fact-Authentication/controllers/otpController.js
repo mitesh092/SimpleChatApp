@@ -50,13 +50,12 @@ const sendOTP = async (req, res) => {
     }
 
     // save in datbase otps
-    await sendVerificationEmail(email, result)
+    await sendVerificationEmail(email, otp)
     const otpPayload = { email, otp };
     const otpBody = await OTP.create(otpPayload); //what do this line 
     res.status(200).json({
       success: true,
       message: 'OTP sent successfully',
-      otp,
     });
   } catch (error) {
     console.log(error.message);

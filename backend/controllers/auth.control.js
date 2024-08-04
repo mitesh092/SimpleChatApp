@@ -8,7 +8,9 @@ import genrateTokenAndCookie from "../utils/genrateToken.js";
 // registration Api
 export const register = async (req, res) => {
   try {
-    const { userName, email, otp , password, confrimPassword, gender } = req.body;
+    const { userName, email,   password, confrimPassword, gender } = req.body;
+    
+    const otp = req.body.otp.trim();
     if (password !== confrimPassword) {
       return res.status(400).json({ error: "Password don't match !" });
     }
@@ -17,7 +19,7 @@ export const register = async (req, res) => {
     const duplicateEmail = await Users.findOne({ email });
 
     if (user) {
-      return res.status(400).json({ error: "User is Already exists !" });
+      return res.status(400).json({ error: "UserName is Already exists !" });
     }
     if (duplicateEmail) {
       return res.status(400).json({ error: "Email is Already register!" });
@@ -25,13 +27,14 @@ export const register = async (req, res) => {
 
     // creating logic of Email OTP sending 
     const responseOTP = await OTP.find({email});
-    if (responseOTP.length === 0 || otp !== responseOTP[0].otp) {
-      console.log(`gen OTP : ${responseOTP[0].otp} == your : ${otp} `)
-      return res.status(400).json({
-        success: false,
-        message: 'The OTP is not valid',
-      });
+   
+    if(otp.length !== 0 && otp === responseOTP[0].otp){
+      res.status(200).json({success : true, message : "OPT verfied successfully."});
+    }else{
+      return res.status(400).json({success : false,error : "Invaild otp "})
+
     }
+    
 
     // hash passwod
     const salt = await bcript.genSalt(10);

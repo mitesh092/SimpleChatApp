@@ -1,4 +1,5 @@
 import React from "react";
+import GenderCheckbox from "./GenderCheckbox";
 
 const Signup = () => {
   return (
@@ -25,12 +26,46 @@ const Signup = () => {
               <span className="text-base label-text">Email</span>
             </label>
             <input
-              type="text"
+              type="email"
               placeholder="Joe@example.com"
               className="w-full input input-bordered h-10 text-lime-50"
             />
+            <div>
+              <label className="label">
+                <span className="text-base label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                className="w-full input input-bordered h-10 text-lime-50"
+              />
+            </div>
 
-            
+            <div>
+              <label className="label">
+                <span className="text-base label-text">confirm Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                className="w-full input input-bordered h-10 text-lime-50"
+              />
+
+              {/* gender checkbox */}
+              <GenderCheckbox />
+
+              <a
+                href="/signup"
+                className="text-sm  text-lime-50 hover:underline hover:text-lime-100 mt-2 inlover:underline hover:text-blue-600 mt-2 inline-block"
+              >
+                {"Don't"} have an account?
+              </a>
+              <div>
+                <button className="btn glass btn-block btn-sm mt-2">
+                  verify Email
+                </button>
+              </div>
+            </div>
           </div>
         </form>
       </div>

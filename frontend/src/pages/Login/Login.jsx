@@ -48,8 +48,9 @@ const Login = () => {
           >
             {"Don't"} have an account?
           </a>
-          <div> </div>
+          <div> 
             <button className="btn glass btn-block btn-sm mt-2">Login</button>
+          </div>
         </form>
       </div>
     </div>

@@ -42,12 +42,12 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <a
-            href="/signup"
+          <Link
+            to="/signup"
             className="text-sm  text-lime-50 hover:underline hover:text-lime-100 mt-2 inlover:underline hover:text-blue-600 mt-2 inline-block"
           >
             {"Don't"} have an account?
-          </a>
+          </Link>
           <div> 
             <button className="btn glass btn-block btn-sm mt-2">Login</button>
           </div>

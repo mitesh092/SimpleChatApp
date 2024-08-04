@@ -1,7 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import GenderCheckbox from "./GenderCheckbox";
+import { Link } from "react-router-dom";
 
-const Signup = () => {
+
+
+const Signup = ({setVerify, setUserData}) => {
+  const [input , setinput] = useState({
+    userName : "" ,
+    email : "",
+    otp : "",
+    password : "",
+    confirmpassword : "",
+    gender : "",
+  
+  })
+  const verifyHandler = async (e) => {
+    e.preventDefault();
+    // http://localhost:3001/api/auth/send-otp
+    
+    const email = input.email;
+    const suceess  = await fetch("http://localhost:3001/api/auth/send-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email
+      })
+    });
+    console.log(suceess);
+    setVerify(true)
+    setUserData(input)
+  }
+
+
+  const handleCheckboxChange = (gender) =>   {
+    setinput({...input, gender})
+
+  }
+  
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-click-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
@@ -9,7 +44,7 @@ const Signup = () => {
           <span className="text-amber-300"> SimpleChatApp</span>
         </h1>
 
-        <form>
+        <form onSubmit={verifyHandler}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">UserName</span>
@@ -18,6 +53,9 @@ const Signup = () => {
               type="text"
               placeholder="Joe123"
               className="w-full input input-bordered  h-10 text-lime-50"
+              required
+              value={input.userName}
+              onChange={(e) => {setinput({...input, userName : e.target.value})}}
             />
           </div>
 
@@ -29,6 +67,9 @@ const Signup = () => {
               type="email"
               placeholder="Joe@example.com"
               className="w-full input input-bordered h-10 text-lime-50"
+              required
+              value={input.email}
+              onChange={(e) => {setinput({...input, email : e.target.value})}}
             />
             <div>
               <label className="label">
@@ -38,6 +79,10 @@ const Signup = () => {
                 type="password"
                 placeholder="Enter Password"
                 className="w-full input input-bordered h-10 text-lime-50"
+                required
+                value={input.password}
+              onChange={(e) => {setinput({...input, password : e.target.value})}}
+              autoComplete="true"
               />
             </div>
 
@@ -49,19 +94,23 @@ const Signup = () => {
                 type="password"
                 placeholder="Enter Password"
                 className="w-full input input-bordered h-10 text-lime-50"
+                required
+                value={input.confirmpassword}
+                onChange={(e) => {setinput({...input, confirmpassword : e.target.value})}}
+                autoComplete="true"
               />
 
               {/* gender checkbox */}
-              <GenderCheckbox />
+              <GenderCheckbox  onCheckboxChange = {handleCheckboxChange} selectedGender ={input.gender} />
 
-              <a
-                href="/signup"
+              <Link
+                to="/login"
                 className="text-sm  text-lime-50 hover:underline hover:text-lime-100 mt-2 inlover:underline hover:text-blue-600 mt-2 inline-block"
               >
                 {"Don't"} have an account?
-              </a>
+              </Link>
               <div>
-                <button className="btn glass btn-block btn-sm mt-2">
+                <button type="submit" className="btn glass btn-block btn-sm mt-2">
                   verify Email
                 </button>
               </div>

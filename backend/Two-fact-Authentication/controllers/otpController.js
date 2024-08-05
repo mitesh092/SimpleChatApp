@@ -29,11 +29,12 @@ const sendOTP = async (req, res) => {
     const { email } = req.body;
     // Check if user is already present
     const checkUserPresent = await User.findOne({ email });
+    console.log(checkUserPresent)
     // If user found with provided email
     if (checkUserPresent) {
-      return res.status(401).json({
+      return res.status(400).json({
         success: false,
-        message: 'User is already registered',
+        error: 'User is already registered',
       });
     }
     let otp = otpGenerator.generate(6, {
@@ -52,7 +53,7 @@ const sendOTP = async (req, res) => {
     // save in datbase otps
     await sendVerificationEmail(email, otp)
     const otpPayload = { email, otp };
-    const otpBody = await OTP.create(otpPayload); //what do this line 
+    const otpBody = await OTP.create(otpPayload); 
     res.status(200).json({
       success: true,
       message: 'OTP sent successfully',

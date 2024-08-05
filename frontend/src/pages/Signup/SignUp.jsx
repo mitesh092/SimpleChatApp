@@ -1,42 +1,38 @@
 import React, { useState } from "react";
 import GenderCheckbox from "./GenderCheckbox";
 import { Link } from "react-router-dom";
+import useUserSignUp from "../../hooks/userSignUp";
 
+const Signup = ({ setVerify, setUserData }) => {
+  const { loading } = useUserSignUp();
 
-
-const Signup = ({setVerify, setUserData}) => {
-  const [input , setinput] = useState({
-    userName : "" ,
-    email : "",
-    otp : "",
-    password : "",
-    confirmpassword : "",
-    gender : "",
-  
-  })
+  const [input, setinput] = useState({
+    userName: "",
+    email: "",
+    otp: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
   const verifyHandler = async (e) => {
     e.preventDefault();
-    // http://localhost:3001/api/auth/send-otp
-    
     const email = input.email;
-    const suceess  = await fetch("http://localhost:3001/api/auth/send-otp", {
+    const suceess = await fetch("/api/auth/send-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email
-      })
+        email,
+      }),
     });
     console.log(suceess);
-    setVerify(true)
-    setUserData(input)
-  }
+    setVerify(true);
+    setUserData(input);
+  };
 
+  const handleCheckboxChange = (gender) => {
+    setinput({ ...input, gender });
+  };
 
-  const handleCheckboxChange = (gender) =>   {
-    setinput({...input, gender})
-
-  }
-  
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-click-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
@@ -55,7 +51,9 @@ const Signup = ({setVerify, setUserData}) => {
               className="w-full input input-bordered  h-10 text-lime-50"
               required
               value={input.userName}
-              onChange={(e) => {setinput({...input, userName : e.target.value})}}
+              onChange={(e) => {
+                setinput({ ...input, userName: e.target.value });
+              }}
             />
           </div>
 
@@ -69,7 +67,9 @@ const Signup = ({setVerify, setUserData}) => {
               className="w-full input input-bordered h-10 text-lime-50"
               required
               value={input.email}
-              onChange={(e) => {setinput({...input, email : e.target.value})}}
+              onChange={(e) => {
+                setinput({ ...input, email: e.target.value });
+              }}
             />
             <div>
               <label className="label">
@@ -81,8 +81,10 @@ const Signup = ({setVerify, setUserData}) => {
                 className="w-full input input-bordered h-10 text-lime-50"
                 required
                 value={input.password}
-              onChange={(e) => {setinput({...input, password : e.target.value})}}
-              autoComplete="true"
+                onChange={(e) => {
+                  setinput({ ...input, password: e.target.value });
+                }}
+                autoComplete="true"
               />
             </div>
 
@@ -95,23 +97,36 @@ const Signup = ({setVerify, setUserData}) => {
                 placeholder="Enter Password"
                 className="w-full input input-bordered h-10 text-lime-50"
                 required
-                value={input.confirmpassword}
-                onChange={(e) => {setinput({...input, confirmpassword : e.target.value})}}
+                value={input.confirmPassword}
+                onChange={(e) => {
+                  setinput({ ...input, confirmPassword: e.target.value });
+                }}
                 autoComplete="true"
               />
 
               {/* gender checkbox */}
-              <GenderCheckbox  onCheckboxChange = {handleCheckboxChange} selectedGender ={input.gender} />
+              <GenderCheckbox
+                onCheckboxChange={handleCheckboxChange}
+                selectedGender={input.gender}
+              />
 
               <Link
                 to="/login"
                 className="text-sm  text-lime-50 hover:underline hover:text-lime-100 mt-2 inlover:underline hover:text-blue-600 mt-2 inline-block"
               >
-                {"Don't"} have an account?
+                have an account?
               </Link>
               <div>
-                <button type="submit" className="btn glass btn-block btn-sm mt-2">
-                  verify Email
+                <button
+                  type="submit"
+                  className="btn glass btn-block btn-sm mt-2 "
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <span className="loading loading-spinner"></span>
+                  ) : (
+                    "verify Email"
+                  )}
                 </button>
               </div>
             </div>

@@ -1,14 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import useLogin from "../../hooks/useLogin";
+import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  //   const { loading, login } = useLogin();
+    const { loading, login } = useLogin();
 
-  const Submit = () => {};
+  const SubmitHandler = async (e) => {
+    e.preventDefault();
+    await login(userName, password)
+
+  };
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-click-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
@@ -17,7 +21,7 @@ const Login = () => {
           <span className="text-amber-300"> SimpleChatApp</span>
         </h1>
 
-        <form onSubmit="Submit">
+        <form onSubmit={SubmitHandler}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
@@ -26,8 +30,9 @@ const Login = () => {
               type="text"
               placeholder="Enter username"
               className="w-full input input-bordered h-10 text-lime-50"
-              value={username}
+              value={userName}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
           </div>
           <div>
@@ -40,6 +45,8 @@ const Login = () => {
               className="w-full input input-bordered h-10 text-lime-50"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="true"
+              required
             />
           </div>
           <Link
@@ -49,7 +56,9 @@ const Login = () => {
             {"Don't"} have an account?
           </Link>
           <div> 
-            <button className="btn glass btn-block btn-sm mt-2">Login</button>
+            <button className="btn glass btn-block btn-sm mt-2" disabled={loading}>
+              {loading ? (<span className="loading loading-spinner"></span>) : "Login" }
+            </button>
           </div>
         </form>
       </div>

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
-
-const userSignUp = () => {
+const useUserSignUp = () => {
   const [loading, setLoading] = useState(false);
+  const { setAuthUser } = useAuthContext();
+
   const signup = async ({
     userName,
     email,
     otp,
     password,
-    confirmpassword,
+    confirmPassword,
     gender,
   }) => {
     const success = handleInputErrors({
@@ -17,7 +19,7 @@ const userSignUp = () => {
       email,
       otp,
       password,
-      confirmpassword,
+      confirmPassword,
       gender,
     });
 
@@ -27,53 +29,64 @@ const userSignUp = () => {
     try {
       const res = await fetch("http://localhost:3001/api/auth/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           userName,
-          Email,
+          email,
           otp,
           password,
-          confirmpassword,
+          confirmPassword,
           gender,
         }),
       });
 
-      
-      console.log(res)
+      const data = await res.json(); // Handling the JSON response
+
+      // localsstorage
+
+      if (res.ok) {
+        toast.success("Registration successful!");
+        localStorage.setItem("Auth-user",JSON.stringify(data));
+        setAuthUser(data);
+        // Handle successful registration here, like redirecting the user
+      } else {
+        throw new Error(data.Error)
+      }
     } catch (error) {
-      toast.error(error.message);
+      toast.error("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
   };
 
-  return {loading, signup}
+  return { loading, signup };
 };
 
-
-export default userSignUp;
+export default useUserSignUp;
 
 function handleInputErrors({
   userName,
-  Email,
+  email,
   otp,
   password,
-  confirmpassword,
+  confirmPassword,
   gender,
 }) {
-  if (!userName || !Email || !otp || !password || !confirmpassword || !gender) {
-    toast.error("plz fill all fields ");
+  if (!userName || !email || !password || !otp || !confirmPassword || !gender) {
+    toast.error("Please fill all fields");
     return false;
   }
 
-  if (password !== confirmpassword) {
-    toast.error("Password Do Not match");
+  if (password !== confirmPassword) {
+    toast.error("Passwords do not match");
     return false;
   }
 
   if (password.length < 6) {
-    toast.error("password must be atleast 6 character ");
-    return true;
+    toast.error("Password must be at least 6 characters");
+    return false;
   }
 
   return true;

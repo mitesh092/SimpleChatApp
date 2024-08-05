@@ -8,70 +8,65 @@ import genrateTokenAndCookie from "../utils/genrateToken.js";
 // registration Api
 export const register = async (req, res) => {
   try {
-    const { userName, email,   password, confrimPassword, gender } = req.body;
+    const { userName, email, password, confirmPassword, gender, otp } = req.body;
+
     
-    const otp = req.body.otp.trim();
-    if (password !== confrimPassword) {
-      return res.status(400).json({ error: "Password don't match !" });
+    if (!userName || !email || !password || !confirmPassword || !gender || !otp) {
+      return res.status(400).json({ error: "All fields are required" });
     }
 
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: "Passwords don't match" });
+    }
+
+    // Validate OTP
+    const responseOTP = await OTP.find({ email });
+    if (!responseOTP.length || otp.trim() !== responseOTP[responseOTP.length - 1].otp) {
+      return res.status(400).json({ error: "Invalid OTP" });
+    }
+
+    // Check if user or email already exists
     const user = await Users.findOne({ userName });
     const duplicateEmail = await Users.findOne({ email });
 
     if (user) {
-      return res.status(400).json({ error: "UserName is Already exists !" });
+      return res.status(400).json({ error: "Username already exists" });
     }
     if (duplicateEmail) {
-      return res.status(400).json({ error: "Email is Already register!" });
+      return res.status(400).json({ error: "Email is already registered" });
     }
 
-    // creating logic of Email OTP sending 
-    const responseOTP = await OTP.find({email});
-   
-    if(otp.length !== 0 && otp === responseOTP[0].otp){
-      res.status(200).json({success : true, message : "OPT verfied successfully."});
-    }else{
-      return res.status(400).json({success : false,error : "Invaild otp "})
-
-    }
-    
-
-    // hash passwod
+    // Hash password
     const salt = await bcript.genSalt(10);
     const hashPassword = await bcript.hash(password, salt);
-   
 
-    // API for random picture
-    const boyRandomDefultPic = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
-    const girlRandomDefultPic = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
+    // Generate profile picture URL
+    const boyRandomDefaultPic = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
+    const girlRandomDefaultPic = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
 
     const newUser = new Users({
       userName,
       email,
       password: hashPassword,
       gender,
-      profilePic: gender === "male" ? boyRandomDefultPic : girlRandomDefultPic,
+      profilePic: gender === "male" ? boyRandomDefaultPic : girlRandomDefaultPic,
     });
 
-    if (newUser) {
-      // gen JWT token
-      genrateTokenAndCookie(newUser._id, res)
-      await newUser.save();
+    await newUser.save();
+    genrateTokenAndCookie(newUser._id, res);
 
-      res.status(201).json({
-        _id: newUser._id,
-        userName: newUser.userName,
-        profilePic: newUser.profilePic,
-      });
-    }else{
-      res.status(400).json({error : " Inavaild user data !"})
-    }
+    res.status(201).json({
+      _id: newUser._id,
+      userName: newUser.userName,
+      profilePic: newUser.profilePic,
+    });
+    
   } catch (error) {
-    console.log("Error in Signup Controller : ", error.message);
-    res.status(500).json({ error: "Internal  server error " });
+    console.log("Error in Signup Controller:", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
-
 };
+
 
 // login API
 export const login = async (req, res) => {
@@ -115,3 +110,25 @@ export const logout =  (req, res) => {
     res.status(500).json({ error: "Internal  server error " });
   }
 };
+
+
+// userSignUp.js:28 
+//  POST http://localhost:3001/api/auth/register 400 (Bad Request)
+// signup	@	userSignUp.js:28
+// handleAccountVerification	@	EmailVarification.jsx:29
+// callCallback2	@	react-dom.development.js:4164
+// invokeGuardedCallbackDev	@	react-dom.development.js:4213
+// invokeGuardedCallback	@	react-dom.development.js:4277
+// invokeGuardedCallbackAndCatchFirstError	@	react-dom.development.js:4291
+// executeDispatch	@	react-dom.development.js:9041
+// processDispatchQueueItemsInOrder	@	react-dom.development.js:9073
+// processDispatchQueue	@	react-dom.development.js:9086
+// dispatchEventsForPlugins	@	react-dom.development.js:9097
+// (anonymous)	@	react-dom.development.js:9288
+// batchedUpdates$1	@	react-dom.development.js:26179
+// batchedUpdates	@	react-dom.development.js:3991
+// dispatchEventForPluginEventSystem	@	react-dom.development.js:9287
+// dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay	@	react-dom.development.js:6465
+// dispatchEvent	@	react-dom.development.js:6457
+// dispatchDiscreteEvent	@	react-dom.development.js:6430
+// ﻿

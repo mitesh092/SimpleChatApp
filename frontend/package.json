@@ -12,6 +12,7 @@
   "dependencies": {
     "@browsery/util": "^0.12.5",
     "axios": "^1.7.2",
+    "backend": "file:..",
     "bootstrap": "^5.3.3",
     "buffer": "^6.0.3",
     "cors": "^2.8.5",

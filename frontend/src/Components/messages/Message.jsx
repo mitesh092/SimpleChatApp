@@ -1,7 +1,10 @@
 import React from "react";
+
 import { useAuthContext } from "../../context/AuthContext";
-import useConversation from "../../store/useConversation";
 import { extractTime } from "../../utils/extractTime";
+
+import useConversation from "../../store/useConversation";
+
 const Message = ({ message }) => {
   const { authUser } = useAuthContext();
   const { selectedConversation } = useConversation();
@@ -16,7 +19,9 @@ const Message = ({ message }) => {
 
   const bgMessage = fromMe ? "bg-bule-500" : "bh-gray-500";
 
-  const formatTime = extractTime(message.updatedAt) 
+  const formatTime = extractTime(message.updatedAt)
+
+  const shakeclass = message.shouldShake ? "shake"  : ""
 
   return (
     <div className={`chat ${chatName}`}>
@@ -25,7 +30,7 @@ const Message = ({ message }) => {
           <img src={`${profilePic}`} alt="user avatar" />
         </div>
       </div>
-      <div className={`chat-bubble text-white ${bgMessage} pb-2`}>
+      <div className={`chat-bubble text-white ${bgMessage} ${shakeclass} pb-2`}>
         {message.message}
       </div>
       <div className="chat-footer opacity-50 text-xs flex gap-1  text-white tems-center">

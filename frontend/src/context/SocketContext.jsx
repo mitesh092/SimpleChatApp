@@ -14,31 +14,18 @@ export const SocketContextProvider = ({ children }) => {
   const { authUser } = useAuthContext();
 
   useEffect(() => {
-    let socketIO = null;
-
     if (authUser) {
-      socketIO = io("http://localhost:3001", {
+      const socket = io("http://localhost:3001", {
         query: {
           userId: authUser._id,
         },
       });
-      setSocket(socketIO);
 
-      const handleOnlineUsers = (users) => {
+      setSocket(socket);
+
+      socket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
-      };
-
-      if (socketIO) {
-        socketIO.on("getOnlineUsers", handleOnlineUsers);
-      }
-
-      // Cleanup function to close the socket and remove event listeners
-      return () => {
-        if (socketIO) {
-          socketIO.off("getOnlineUsers", handleOnlineUsers);
-          socketIO.close();
-        }
-      };
+      });
     } else {
       if (socket) {
         socket.close();

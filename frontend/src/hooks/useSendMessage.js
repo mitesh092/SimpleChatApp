@@ -11,8 +11,9 @@ const useSendMessage = () => {
   const SendMessage = async (message) => {
     setLoading(true);
     try {
+      
       const res = await fetch(
-        `/api/messages/sned/${selectedConversation._id}`,
+        `/api/messages/send/${selectedConversation._id}`,
         {
           method: "POST",
           headers: {

@@ -15,6 +15,6 @@ const conversationscama = new mongoose.Schema({
     ]
 }, {timestamps : true}); 
 
-const Conversation  = mongoose.model("conversation",conversationscama);
+const ConversationModel  = mongoose.model("conversation",conversationscama);
 
-export default Conversation;
+export default ConversationModel;

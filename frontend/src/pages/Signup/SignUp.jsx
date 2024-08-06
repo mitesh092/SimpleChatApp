@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GenderCheckbox from "./GenderCheckbox";
 import { Link } from "react-router-dom";
 import useUserSignUp from "../../hooks/userSignUp";
+import toast from "react-hot-toast";
 
 const Signup = ({ setVerify, setUserData }) => {
   const { loading } = useUserSignUp();
@@ -24,6 +25,10 @@ const Signup = ({ setVerify, setUserData }) => {
         email,
       }),
     });
+
+    if(suceess.ok){
+      toast.success("Otp sent")
+    }
     console.log(suceess);
     setVerify(true);
     setUserData(input);

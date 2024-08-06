@@ -30,10 +30,10 @@ export const register = async (req, res) => {
     const duplicateEmail = await Users.findOne({ email });
 
     if (user) {
-      return res.status(400).json({ error: "Username already exists" });
+      return res.status(409).json({ error: "Username already exists" });
     }
     if (duplicateEmail) {
-      return res.status(400).json({ error: "Email is already registered" });
+      return res.status(409).json({ error: "Email is already registered" });
     }
 
     // Hash password

@@ -52,10 +52,11 @@ const useUserSignUp = () => {
         setAuthUser(data);
         // Handle successful registration here, like redirecting the user
       } else {
-        throw new Error(data.Error)
+        throw new Error(data.error)
       }
     } catch (error) {
-      toast.error("An unexpected error occurred");
+      toast.error(error.message);
+      console.log(error)
     } finally {
       setLoading(false);
     }

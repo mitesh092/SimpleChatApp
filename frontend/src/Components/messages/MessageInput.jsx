@@ -9,10 +9,10 @@ const MessageInput = () => {
   const hanldesubmit = async (e) => {
     e.preventDefault();
     if (!message) return;
-
     await SendMessage(message);
     setmessage("");
   };
+  
 
   return (
     <form className="px-4 my-3" onSubmit={hanldesubmit}>

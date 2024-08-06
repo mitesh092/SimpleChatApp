@@ -5,13 +5,20 @@
   "scripts": {
     "server": "nodemon backend/index.js",
     "start": "node backend/index.js",
-    "build" : "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "type": "module",
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "chat",
+    "application",
+    "node"
+  ],
+  "author": "mitesh vegad",
   "license": "ISC",
-  "description": "",
+  "description": "A simple chat application built with Node.js and Express.",
+  "engines": {
+    "node": ">=18.18.0 <21.0.0"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",

@@ -29,7 +29,6 @@ const Signup = ({ setVerify, setUserData }) => {
     if(suceess.ok){
       toast.success("Otp sent")
     }
-    console.log(suceess);
     setVerify(true);
     setUserData(input);
   };

@@ -13,13 +13,13 @@ const useGetConversation = () => {
             const res  = await fetch("https://simplechatapp-0s7v.onrender.com/api/users");
             const data = await res.json();
 
-            if(data.error){
+            
+            if(data.error ){
                 throw new Error(data.error)
             }
             setConversations(data)
         }catch(error){
             toast(error.message);
-
 
         }finally{
             setLoading(false)

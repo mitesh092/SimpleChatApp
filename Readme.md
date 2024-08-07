@@ -1,7 +1,4 @@
 # Simple Chat App
-
-Here’s how you can structure this information for a README file:
-
 ---
 
 # Real-Time Chat Application

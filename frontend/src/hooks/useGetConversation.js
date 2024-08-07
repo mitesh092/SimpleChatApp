@@ -10,7 +10,7 @@ const useGetConversation = () => {
         setLoading(true)
         try{
             // may be here is error
-            const res  = await fetch("/api/users");
+            const res  = await fetch("https://simplechatapp-0s7v.onrender.com/api/users");
             const data = await res.json();
 
             if(data.error){

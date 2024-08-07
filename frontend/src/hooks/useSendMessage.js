@@ -13,7 +13,7 @@ const useSendMessage = () => {
     try {
       
       const res = await fetch(
-        `/api/messages/send/${selectedConversation._id}`,
+        `https://simplechatapp-0s7v.onrender.com/api/messages/send/${selectedConversation._id}`,
         {
           method: "POST",
           headers: {

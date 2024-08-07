@@ -12,7 +12,7 @@ const useGetMessages = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/messages/${selectedConversation._id}`
+          `https://simplechatapp-0s7v.onrender.com/api/messages/${selectedConversation._id}`
         );
         const data = await res.json();
 

@@ -18,7 +18,7 @@ const Signup = ({ setVerify, setUserData }) => {
   const verifyHandler = async (e) => {
     e.preventDefault();
     const email = input.email;
-    const suceess = await fetch("/api/auth/send-otp", {
+    const suceess = await fetch("https://simplechatapp-0s7v.onrender.com/api/auth/send-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

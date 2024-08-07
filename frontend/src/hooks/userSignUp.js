@@ -27,7 +27,7 @@ const useUserSignUp = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/api/auth/register", {
+      const res = await fetch("https://simplechatapp-0s7v.onrender.com/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

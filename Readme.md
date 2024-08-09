@@ -55,7 +55,7 @@ Welcome to the Real-Time Chat Application! This project utilizes a modern tech s
 
 ## 🔗 Preview the Project
 
-Check out the live demo of the Real-Time Chat Application at [Simple-chat-app/]([https://simplechatapp-0s7v.onrender.com/](https://simplechatapp-0s7v.onrender.com)).
+Check out the live demo of the Real-Time Chat Application at [Simple-chat-app/](https://simplechatapp-0s7v.onrender.com/).
 
 ---
 

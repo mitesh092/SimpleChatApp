@@ -96,7 +96,7 @@ A real-time chat application built with React for the frontend and Express for t
 3. Start the backend server:
 
     ```bash
-    npm start
+    npm run server
     ```
 
    The backend server should now be running on `http://localhost:5000` (or your configured port).
@@ -122,11 +122,11 @@ A real-time chat application built with React for the frontend and Express for t
     npm dev run
     ```
 
-   The React app should now be running on `http://localhost:3000` (or your configured port).
+   The React app should now be running on `http://localhost:5001` (or your configured port).
 
 ### Usage
 
-1. Open `http://localhost:3000` in your browser to start using the chat app.
+1. Open `http://localhost:5001` in your browser to start using the chat app.
 
 ## Technologies Used
 

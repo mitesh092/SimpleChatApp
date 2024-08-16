@@ -9,6 +9,7 @@ import { useAuthContext } from "./context/AuthContext";
 function App() {
   const {authUser} = useAuthContext();
   return (
+    // suggest to use responsive css in  another  File. 
     <div className="p-4 h-screen flex items-center justify-center">
       <Routes>
         <Route path="/" element={authUser ?  <Home /> : <Navigate to="/login" />}></Route>
